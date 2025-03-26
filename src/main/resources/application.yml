@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5332/library
+    username: tongei
+    password: tongei123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+app:
+  version: /api/v1
