@@ -2,20 +2,17 @@ package org.library.library_management.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 
 @Entity
 @Data
 @Table(name = "books")
-public class Book {
+public class Book extends AuditEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String title;
     private String description;
-
+    private String imageName;
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;

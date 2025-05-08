@@ -1,4 +1,4 @@
-package org.library.library_management.specification;
+package org.library.library_management.specification.author;
 
 import lombok.Data;
 

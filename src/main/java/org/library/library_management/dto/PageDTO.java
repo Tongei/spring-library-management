@@ -17,7 +17,7 @@ public class PageDTO {
                 .last(page.isLast())
                 .pageSize(page.getPageable().getPageSize())
                 .totalPages(page.getTotalPages())
-                .pageNumber(page.getPageable().getPageNumber())
+                .pageNumber(page.getPageable().getPageNumber() + 1)
                 .totalElements(page.getTotalElements())
                 .numberOfElements(page.getNumberOfElements())
                 .build();

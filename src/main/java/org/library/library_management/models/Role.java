@@ -3,12 +3,17 @@ package org.library.library_management.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
+@Table(name = "roles")
 @Entity
-@Table(name = "authors")
-public class Author {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Permission> permissions;
 }

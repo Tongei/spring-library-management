@@ -5,8 +5,8 @@ import org.library.library_management.models.Author;
 import org.library.library_management.repositories.AuthorRepository;
 import org.library.library_management.services.AuthorService;
 import org.library.library_management.services.util.PageUtil;
-import org.library.library_management.specification.AuthorFilter;
-import org.library.library_management.specification.AuthorSpecification;
+import org.library.library_management.specification.author.AuthorFilter;
+import org.library.library_management.specification.author.AuthorSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,5 +35,17 @@ public class AuthorServiceImpl implements AuthorService {
         Specification<Author> spec = new AuthorSpecification(filter);
         Pageable pageable = PageUtil.getPageable(page, size);
         return authorRepository.findAll(spec, pageable);
+    }
+
+    @Override
+    public void deleteAuthor(long id) {
+        getAuthorById(id);
+        authorRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateAuthor(Author author) {
+        getAuthorById(author.getId());
+        authorRepository.save(author);
     }
 }

@@ -1,4 +1,8 @@
 spring:
+  security:
+    user:
+      name: admin
+      password: admin123
   datasource:
     url: jdbc:postgresql://localhost:5332/library
     username: tongei
@@ -7,5 +11,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
 app:
   version: /api/v1
+  base-url: http://localhost:8080
+  default-cover: no-cover.png
+  response-cover-path: /images/covers/
