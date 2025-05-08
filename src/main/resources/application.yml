@@ -5,7 +5,7 @@ spring:
       password: admin123
 
   datasource:
-    url: jdbc:postgresql://localhost:5332/library
+    url: jdbc:postgresql://localhost:5432/library
     username: tongei
     password: tongei123
     driver-class-name: org.postgresql.Driver  # Add driver class if it's missing
