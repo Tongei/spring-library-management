@@ -1,4 +1,6 @@
 spring:
+  server:
+    port: 10000
   security:
     user:
       name: admin
