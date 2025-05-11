@@ -2,6 +2,7 @@ package org.library.library_management.config.security;
 
 import org.library.library_management.config.jwt.JwtLoginFilter;
 import org.library.library_management.config.jwt.TokenVerifyFilter;
+import org.library.library_management.exception.FilterChainExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,11 +28,16 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+
+    @Autowired
+    private FilterChainExceptionHandler filterChainExceptionHandler;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
         http
                 .csrf().disable()
                 .addFilter(new JwtLoginFilter(authenticationManager))
+                .addFilterBefore(filterChainExceptionHandler, JwtLoginFilter.class)
                 .addFilterAfter(new TokenVerifyFilter(), JwtLoginFilter.class)
                 .authorizeHttpRequests((authz) ->
                         authz

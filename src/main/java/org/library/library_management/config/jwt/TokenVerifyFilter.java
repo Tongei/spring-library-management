@@ -8,6 +8,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.library.library_management.exception.ApiException;
+import org.library.library_management.payload.ApiResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -63,11 +66,11 @@ public class TokenVerifyFilter extends OncePerRequestFilter {
                 Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authority);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception e) {
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                response.setContentType("application/json");
-                response.getWriter().write("{\"error\": \"Invalid Authorization token\"}");
-                response.getWriter().flush();
-                return;
+//                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                response.setContentType("application/json");
+//                response.getWriter().write("{\"error\": \"Invalid Authorization token\", \"exception\": \"" + e.getMessage() + "\"}");
+//                response.getWriter().flush();
+                throw new ApiException(HttpStatus.BAD_REQUEST, "Invalid Authorization token");
             }
             filterChain.doFilter(request, response);
             return;

@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<?> createUser(@RequestBody UserRequestDTO userRequestDTO) {
+        System.out.println("USer DTO" + userRequestDTO);
         User user = UserMapper.INSTANCE.toUser(userRequestDTO);
         user.setEnabled(true);
         user.setAccountNonExpired(true);
